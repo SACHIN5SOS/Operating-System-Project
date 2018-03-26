@@ -11,7 +11,7 @@ sem_t chairsem[3];
 pthread_mutex_t AccessChair;
 void *func1_teacher();          //thread for handling Teacher tasks             
 void *func2_student(void *studThread_id);   //function for handling student task
-void main()
+int main()
 {
 	int students_prog;		
 	int i,in,n;

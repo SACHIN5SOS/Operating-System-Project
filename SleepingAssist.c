@@ -111,8 +111,6 @@ void *func1_teacher()
 		
 		sem_post(&chairsem[ci]);
 		count_chair--;
-			
-		// printf("Remaining Chair: %d\n", 3-count_chair);
 		ci = (ci + 1) % 3;
 		pthread_mutex_unlock(&AccessChair);
 

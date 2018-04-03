@@ -84,7 +84,7 @@ void *func2_student(void *studThread_id)
 		sem_wait(&chairsem[index]);		
 		printf("Student %ld dicussing with Teacher Assistant \n", (long)studThread_id);
 		sem_wait(&Student_Sem);		
-		printf("Student %ld left in Room\n",(long)studThread_id);
+		printf("Student %ld left the Room\n",(long)studThread_id);
 	}
 	
 	else 

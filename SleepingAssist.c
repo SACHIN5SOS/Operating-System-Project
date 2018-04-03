@@ -14,7 +14,8 @@ void *func2_student(void *studThread_id);   //function for handling student task
 int main()
 {
 	int students_prog;		
-	int i,in,n;
+	int i,n;
+	srand(time(NULL));
 	pthread_t *Student_thread;		 //thread for handling Teacher Tasks
 	pthread_t Teacher_thread;		//thread for handling Stufents Tasks
 	sem_init(&Teacher_Sem, 0, 0);
@@ -25,19 +26,18 @@ int main()
 	}
 	printf("Enter the number of students you want: \n");
 	scanf("%d",&n);
-	in=rand()%10;
 	pthread_mutex_init(&AccessChair, NULL);
 	
-	if(in<=1)
+	if(n<=1)
 	{
-		printf("Using Default values %d students \n",n);
-		students_prog = n;
+		printf("Using Default values %d students \n",5);
+		students_prog = 5;
 	}
 	
 	else
 	{
 		printf("Creating %d threads.\n",students_prog);
-		students_prog = in;
+		students_prog = n;
 	}
 	
 	Student_thread = (pthread_t*) malloc(sizeof(pthread_t)*students_prog);	 
@@ -59,8 +59,7 @@ int main()
 
 void *func2_student(void *studThread_id) 
 {
-	sleep(3);		
-
+	
 	printf("Student %ld go to Teaching Assistant \n", (long)studThread_id);
 	pthread_mutex_lock(&AccessChair);
 	int sum = count_chair;
@@ -77,7 +76,7 @@ void *func2_student(void *studThread_id)
 		pthread_mutex_lock(&AccessChair);
 		int index = (ci + count_chair) % 3;
 		count_chair++;
-		printf("Student sat on chair. Remaining Chair %d\n", 3 - count_chair);
+		printf("Student sat on chair. Remaining Chair %d\n",abs(3-count_chair));
 		pthread_mutex_unlock(&AccessChair);
 
 		// unlock
